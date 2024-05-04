@@ -1,0 +1,53 @@
+import { userController } from "../adapters/userController";
+import { UserRepository } from "../infrastructure/respostories/userRepository";
+import { tempUserRepository } from "../infrastructure/respostories/tempUserRepository";
+import { userUseCase } from "../useCases/userUseCase";
+import { driverUseCase } from "../useCases/driverUseCase";
+
+import { encrypting } from "./encrypt";
+import { JWTTOKEN } from "./jwt";
+import { GenerateOtp } from "./generateOtp";
+import { mailSender } from "./nodeMailer";
+import { vehicleController } from "../adapters/vehicleControllers";
+import { vehicleUseCase } from "../useCases/vehicleUseCase";
+import { vehicleRepository } from "../infrastructure/respostories/vehicleRepositories";
+import { adminUseCase } from "../useCases/adminUseCase";
+import { adminRepository } from "../infrastructure/respostories/adminRepository";
+import { adminController } from "../adapters/adminController";
+import { packageController } from "../adapters/packageController";
+import { packageUseCase } from "../useCases/packagesUseCase";
+import { packageRepository } from "../infrastructure/respostories/packageRepository";
+import { driverRepository } from "../infrastructure/respostories/driverRepository";
+import { driverController } from "../adapters/driverController";
+import { bookingRepository } from "../infrastructure/respostories/bookingRepository";
+import { bookingusecase } from "../useCases/bookingUseCase";
+import { bookingController } from "../adapters/bookingController";
+
+
+// Providers used ****
+const encrypt = new encrypting()
+const generateOTP = new GenerateOtp()
+const  sendMail = new mailSender()
+const jwt = new JWTTOKEN()
+// repositories ****
+const userRepository = new UserRepository()
+const tempuserRepository = new tempUserRepository()
+const VehicleRepository = new vehicleRepository()
+const AdminRepository = new adminRepository()
+const PackageRepository = new packageRepository()
+const DriverRepository = new driverRepository()
+const BookingRepository = new bookingRepository() 
+// usecases ****
+const useruseCase = new userUseCase(userRepository,tempuserRepository,jwt,sendMail,encrypt)
+const vehicleuseCase = new vehicleUseCase(VehicleRepository)
+const adminuseCase = new adminUseCase(AdminRepository)
+const packageuseCase = new packageUseCase(PackageRepository)
+const driverusecase = new driverUseCase(DriverRepository)
+const bookingUsecase = new bookingusecase(BookingRepository)
+// controller ****
+export const uController = new userController(useruseCase,generateOTP,encrypt,bookingUsecase)
+export const vController = new vehicleController(vehicleuseCase)
+export const aConntroller = new adminController(adminuseCase,jwt)
+export const pController = new packageController(packageuseCase)
+export const dController = new driverController(driverusecase)
+export const bController = new bookingController(bookingUsecase)
