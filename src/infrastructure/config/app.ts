@@ -8,7 +8,11 @@ import adminRouter from "../routes/adminRoutes";
 import packageRouter from "../routes/packageRoutes";
 import driverRouter from "../routes/driverRoutes";
 import bookingRouter from "../routes/bookingRoutes";
+import chatRouter from "../routes/chatRoutes";
 dotenv.config()
+
+
+
 
 export const createServer = () => {
     try {
@@ -18,7 +22,9 @@ export const createServer = () => {
         app.use(express.json({limit:'50mb'}))
         app.use(express.urlencoded({limit:'50mb', extended: true }))
         app.use('/images', express.static(path.join(__dirname, '../../../images')))
-        app.use(cors())
+        app.use(cors({
+            origin:'*'
+        }))
 
         app.use('/api/user',userRouter)
         app.use('/api/vehicle',vehicleRouter)
@@ -26,6 +32,7 @@ export const createServer = () => {
         app.use('/api/package',packageRouter)
         app.use('/api/driver',driverRouter)
         app.use('/api/bookings',bookingRouter)
+        app.use('/api/chat',chatRouter)
 
         return app
 

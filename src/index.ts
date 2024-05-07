@@ -1,12 +1,14 @@
 import { createServer } from './infrastructure/config/app';
 import { mongoConnect } from './infrastructure/config/db';
-import http from 'http'
+import {Server, Socket, Server as socketIo} from "socket.io"
+// import http from 'http'
+import server from './providers/socketIo';
 const PORT = process.env.PORT || 3000
-
 const app = createServer()
 mongoConnect().then(()=>{
-    if(app){ 
-        const server = http.createServer(app)
+    if(server){ 
+        // const server = http.createServer(app)
+       
         server.listen(PORT,()=>console.log(`Server Connected ${PORT}`)
         )
     }else{
