@@ -94,6 +94,12 @@ export class UserRepository implements IuserRepo {
             throw err
         }
     }
-
+    async updateLastSeen(id:any):Promise<IuserRes | null>{
+        try{
+            return await userSchema.findByIdAndUpdate(id,{lastseen:Date.now()})
+        }catch(err){
+            throw err
+        }
+    }
 
 }

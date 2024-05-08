@@ -17,4 +17,5 @@ userRouter.get('/getUser',(req,res)=>uController.getUserData(req,res))
 userRouter.post('/updateProfile',(req,res)=>uController.updateUser(req,res))
 userRouter.post('/getBookingSession',(req,res)=>uController.bookingSession(req,res))
 userRouter.post('/webhook',(req,res)=>uController.webhookRouter(req,res))
+userRouter.get('/updateLastseen',(req,res)=>uController.updateLastseen(req,res))
 export default userRouter 

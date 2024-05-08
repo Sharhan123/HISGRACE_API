@@ -29,10 +29,21 @@ const server = http.createServer(createServer())
   }
 
   io.on('connection', (socket: Socket) => {
+    const id = findUserSocketId('admin')
+        if(id){
+          const data = users.map((item)=>item.id) 
+          socket.to(id).emit('admin-onlines',data)
+        }
     console.log('A user connected:', users);
     
+
     socket.on('user_connect', (userId: string) => {
         addUser(userId, socket.id);
+        const id = findUserSocketId('admin')
+        if(id){
+          const data = users.map((item)=>item.id) 
+          socket.to(id).emit('admin-onlines',data)
+        }
       });
     
     
@@ -42,6 +53,11 @@ const server = http.createServer(createServer())
       const index = users.findIndex(user => user.socketId === socket.id);
       if (index !== -1) {
         users.splice(index, 1);
+      }
+      const id = findUserSocketId('admin')
+      if(id){
+        const data = users.map((item)=>item.id) 
+        socket.to(id).emit('admin-onlines',data)
       }
     });
 
@@ -63,6 +79,14 @@ const server = http.createServer(createServer())
     //   if (recipientSocketId) {
     //   }
     });
+
+    socket.on('online',()=>{
+      const recipientSocketId = findUserSocketId('admin')
+      if(recipientSocketId){
+        const data = users.map((item)=>item.id) 
+        socket.to(recipientSocketId).emit('admin-onlines',data)
+      }
+    })
 
     socket.on('admin_message', (data) => {
       console.log('Admin sent message:', data); 

@@ -16,6 +16,7 @@ export interface Iuser {
     profile?:String
     isBlocked:boolean
     address?:IuserAddres
+    lastseen:Date
 }
 
 export interface IuserRes extends Iuser {}

@@ -152,6 +152,9 @@ export class userUseCase {
     async updateUser(id:Schema.Types.ObjectId, user:IuserEdit){
         return await this.userRepository.updateUserDetails(id,user)
     }
+    async updateLastseen(id:any){
+        return await this.userRepository.updateLastSeen(id)
+    }
     
 
 }

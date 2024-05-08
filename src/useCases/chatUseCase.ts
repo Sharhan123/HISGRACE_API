@@ -1,5 +1,5 @@
 import { chatRepository } from "../infrastructure/respostories/chatRepository";
-import { IMessage } from "../interfaces/schema/chatSchema";
+import { IMessage, Ilastseen } from "../interfaces/schema/chatSchema";
 
 export class chatUsecase {
     constructor(
@@ -11,5 +11,11 @@ export class chatUsecase {
     }
     async findChats(id:any){
         return await this.chatRepository.findById(id)
+    }
+    async saveLastseen(data:Ilastseen){
+        return await this.chatRepository.saveLast(data)
+    }
+    async findLastseen(id:string){
+        return await this.chatRepository.findLastById(id)
     }
 }

@@ -358,4 +358,24 @@ export class userController {
         }
     }
 
+    async updateLastseen(req:Request,res:Response){
+        try{
+            const token = req.headers.authorization;
+            if (token) {
+                
+                
+                const decoded = jwt.verify(token?.slice(7), process.env.JWT_SECRET as string) as JwtPayload
+            const data = await this.userUseCase.updateLastseen(decoded.id)
+            return res.status(STATUS_CODES.OK).json({message:"success",data})
+            }else{
+                return res.status(STATUS_CODES.UNAUTHORIZED).json({message:"Please login your token is missing"})
+            }
+
+        }catch(err){
+            console.log(err)
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
+
+        }
+    }
+
 }
