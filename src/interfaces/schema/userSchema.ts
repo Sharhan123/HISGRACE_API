@@ -16,7 +16,9 @@ export interface Iuser {
     profile?:String
     isBlocked:boolean
     address?:IuserAddres
-    lastseen:Date
+    lastseen:Date,
+    unRead:Number
+    newMessage:Number
 }
 
 export interface IuserRes extends Iuser {}

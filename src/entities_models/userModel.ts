@@ -43,7 +43,9 @@ const userModel: Schema = new Schema<Iuser & Document>({
         required: true
     },
     address:AddressSchema,
-    lastseen:{type:Date,required:true,default:Date.now()}
+    lastseen:{type:Date,required:true,default:Date.now()},
+    unRead:{type:Number,required:true,default:0},
+    newMessage:{type:Number,required:true,default:0}
 })
 
 const userSchema : Model<Iuser & Document> = mongoose.model<Iuser & Document>('Users',userModel);

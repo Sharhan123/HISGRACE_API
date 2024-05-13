@@ -21,6 +21,19 @@ export const  uploadImageToCloudinary = async(base64String:any)=> {
     }
   }
 
+  export const uploadAudioToCloudinary = async (base64String: any) => {
+    try {
+      const result = await cloudinary.uploader.upload(base64String, { resource_type: "video" });
+      console.log("Audio uploaded successfully:", result.url);
+      return result.url;
+    } catch (error) {
+      console.error("Error uploading audio to Cloudinary:", error);
+      throw error;
+    }
+  };
+  
+  
+
   export const removeImage = async(url:String)=>{
     try{
       const result = await cloudinary.uploader.destroy(url)

@@ -155,6 +155,15 @@ export class userUseCase {
     async updateLastseen(id:any){
         return await this.userRepository.updateLastSeen(id)
     }
+    async updateAddress(id:any,data:any){
+        return await this.userRepository.updateAddress(id,data)
+    }
+    async updateCount(id:any,count:any){
+        return await this.userRepository.updateCount(id,count)
+    }
+    async updateNewMessage(id:any,count:any){
+        return await this.userRepository.updateNewMessage(id,count)
+    }
     
 
 }

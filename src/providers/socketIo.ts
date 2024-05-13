@@ -1,6 +1,7 @@
 import http from 'http';
 import { Server, Socket } from 'socket.io';
 import { createServer } from '../infrastructure/config/app';
+import userSchema from '../entities_models/userModel';
 
 let users: { id: string, socketId: string }[] = [];
 const server = http.createServer(createServer())
@@ -61,19 +62,17 @@ const server = http.createServer(createServer())
       }
     });
 
-    socket.on('message', (data) => {
-      console.log('Received message:', data);
-
+    socket.on('message', async (data) => {
+      // console.log('Received message:', data);
       const { sender, reciever, message } = data;
       const recipientSocketId = findUserSocketId('admin');
       const senderId = findUserSocketId(sender)
-      console.log(senderId,'id');
        
         if(recipientSocketId && senderId){
-
+          socket.to(recipientSocketId).emit('update_count',{id:sender})
           socket.to(recipientSocketId).emit('admin-recive', data);
           socket.to(senderId).emit('from_admin', data);
-        
+  
         }
       
     //   if (recipientSocketId) {
@@ -89,13 +88,13 @@ const server = http.createServer(createServer())
     })
 
     socket.on('admin_message', (data) => {
-      console.log('Admin sent message:', data); 
+      // console.log('Admin sent message:', data); 
 
       const { reciever, content ,sender} = data;
 
       const recipientSocketId = findUserSocketId(reciever);
       const senderId = findUserSocketId('admin')
-      console.log(senderId,'idfrom');
+      // console.log(senderId,'idfrom');
       
       if (recipientSocketId && senderId) {
         // console.log('hiii',data);

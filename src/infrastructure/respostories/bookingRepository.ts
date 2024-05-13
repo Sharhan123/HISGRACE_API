@@ -17,21 +17,32 @@ export class bookingRepository implements IbookingRepo{
 
      async findById(id: string): Promise<Ibooking | null> {
         try{
-            return await bookingSchema.findById(id)
+
+            let data =  await bookingSchema.findById(id)
+            await bookingSchema.updateMany({type: 'one-way','period.date': { $lt: new Date() }},{ $set: { status: 'Completed' } } )            
+            await bookingSchema.updateMany({type: 'round-way','returnDate': { $lt: new Date() }},{ $set: { status: 'Completed' } } ) 
+            return data
         }catch(err){
             throw err
         }
     }
-    async findAll():Promise<Ibooking [] | null>{
+    async findAll():Promise<Ibooking [] | null>{ 
         try{
-            return await bookingSchema.find({payment:true}).populate('vehicle')
+            await bookingSchema.deleteMany({payment:false})
+            await bookingSchema.updateMany({type: 'one-way','period.date': { $lt: new Date() }},{ $set: { status: 'Completed' } } )            
+            await bookingSchema.updateMany({type: 'round-way','returnDate': { $lt: new Date() }},{ $set: { status: 'Completed' } } )            
+        return await bookingSchema.find({payment:true}).populate('vehicle')
         }catch(err){
             throw err
         }
     }
     async findByUserId(id: String): Promise<Ibooking[] | null> {
         try{
-            return await bookingSchema.find({userId:id})
+            let data = await bookingSchema.find({userId:id})
+            await bookingSchema.updateMany({type: 'one-way','period.date': { $lt: new Date() }},{ $set: { status: 'Completed' } } )            
+            await bookingSchema.updateMany({type: 'round-way','returnDate': { $lt: new Date() }},{ $set: { status: 'Completed' } } ) 
+            
+            return data
         }catch(err){
             throw err
         }
@@ -41,6 +52,13 @@ export class bookingRepository implements IbookingRepo{
             console.log('updating',id,status);
             
             return await bookingSchema.findOneAndUpdate({_id:id},{payment:status})
+        }catch(err){
+            throw err
+        }
+    }
+    async bookingStatus(id:string,status:string):Promise<Ibooking | null>{
+        try{
+            return await bookingSchema.findByIdAndUpdate(id,{status:status})
         }catch(err){
             throw err
         }

@@ -288,75 +288,7 @@ export class userController {
         }
     }
 
-    async bookingSession(req: Request, res: Response) {
-        try {
-            const data = req.body
-            const token = req.headers.authorization;
-            if (token) {
-                
-                
-                const decoded = jwt.verify(token?.slice(7), process.env.JWT_SECRET as string) as JwtPayload
-                
-                const resData = {
-                    ...data,
-                    userId: decoded.id,
-                }
-
-                
-                const line_items = [
-                    {
-                        price_data: {
-                            currency: "INR",
-                            product_data: {
-                                name: `Taxi booking charge of trip ${data.from.name || data.from.city} TO ${data.to.name || data.to.city}`,
-                            },
-                            unit_amount: Math.round(Math.max(500,0.3 * data.totalPrice) *100),  
-                        },
-                        quantity: 1,
-
-                    },
-                ]
-                
-                const saved:any = await this.bookingusecase.saveBooking(resData)
-                const session = await stripe.checkout.sessions.create({
-                    payment_method_types: ["card"],
-                    line_items: line_items,
-                    mode: "payment",
-                    success_url: "http://localhost:5173/success",
-                    cancel_url: "http://localhost:5173/failure",
-                    billing_address_collection: "required",
-                    metadata: {
-                        userId: JSON.stringify(saved._id)
-                    }
-                })
-
-                return res.status(STATUS_CODES.OK).json({ session: session.id })
-            }
-
-        } catch (err) {
-            console.log(err)
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
-        }
-    }
-
-    async webhookRouter(req: Request, res: Response) {
-        console.log("hello........................................");
-
-        try {
-            const event = req.body
-            const stripeSignature: string | string[] = req.headers['stripe-signature'] || ''
-            if (event.type === 'checkout.session.completed') {
-                const session = event.data.object;
-                const userId = session.metadata.userId;
-                await this.bookingusecase.updatePayment(JSON.parse(userId),true)
-                res.status(200).json({ received: true });
-            } 
-        } catch (err) {
-            console.log(err)
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
-
-        }
-    }
+    
 
     async updateLastseen(req:Request,res:Response){
         try{
@@ -375,6 +307,49 @@ export class userController {
             console.log(err)
             return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
 
+        }
+    }
+
+    async updateAddress(req:Request,res:Response){
+        try{
+            
+            
+                const address = req.body
+            const token = req.headers.authorization;
+            if (token) {
+                
+                
+                const decoded = jwt.verify(token?.slice(7), process.env.JWT_SECRET as string) as JwtPayload
+                const data = await this.userUseCase.updateAddress(decoded.id,address)
+                return res.status(STATUS_CODES.OK).json({message:'success',data})
+            }
+        }catch(err)
+        {
+            console.log(err);
+            
+        }
+    }
+    async updateUnRead(req:Request,res:Response){
+        try{
+            const {id,count} = req.body
+           
+                const data = await this.userUseCase.updateCount(id,count)
+                return res.status(STATUS_CODES.OK).json({message:'success',data})
+            
+        }catch(err)
+        {
+            console.log(err);
+            
+        }
+    }
+    async updateNewMessage(req:Request,res:Response){
+        try{
+            const {id,count}  = req.body
+            const data = await this.userUseCase.updateNewMessage(id,count)
+            return res.status(STATUS_CODES.OK).json({message:'success',data})
+        }catch(err){
+            console.log(err);
+            
         }
     }
 

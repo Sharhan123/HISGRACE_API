@@ -101,5 +101,38 @@ export class UserRepository implements IuserRepo {
             throw err
         }
     }
+    async updateAddress(id:any,data:any):Promise<IuserRes | null>{
+        try{
+            return await userSchema.findByIdAndUpdate(id,{address:data})
+        }catch(err){
+            throw err
+        }
+    }
+    async updateCount(id:any,count:any):Promise<Iuser | null>{
+        try{
+            if(count === 'inc'){
+                console.log(count);
+                
+                return await userSchema.findByIdAndUpdate(id,{$inc:{unRead:1}})
+            }else{
+                console.log(count,'/.//.');
+                return await userSchema.findByIdAndUpdate(id,{unRead:0})
+
+            }
+        }catch(err){
+            throw err
+        }
+    }
+    async updateNewMessage(id:any,count:any):Promise<Iuser | null>{
+        try{
+            if(count === 'inc'){
+                return await userSchema.findByIdAndUpdate(id,{$inc:{newMessage:1}})
+            }else{
+                return await userSchema.findByIdAndUpdate(id,{newMessage:0})
+            }
+        }catch(err){
+            throw err
+        }
+    }
 
 }

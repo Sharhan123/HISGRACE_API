@@ -8,7 +8,8 @@ const MessageSchema: Schema = new Schema({
   reciever: { type: String, required: true }, 
   sender:{type:String,required:true},
   time: { type: Date, default: Date.now },
-  contentType:{type:String,required:true}
+  contentType:{type:String,required:true},
+  isRead:{type:Boolean,required:true,default:false}
 });
 
 const Message = mongoose.model<IMessage & Document>('Messages', MessageSchema);

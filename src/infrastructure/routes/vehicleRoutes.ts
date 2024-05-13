@@ -9,4 +9,5 @@ vehicleRouter.get('/getAllVehices',(req,res)=>vController.getAllVehicles(req,res
 vehicleRouter.delete('/deleteVehicle/:id',(req,res)=>vController.deleteVehicle(req,res))
 vehicleRouter.post('/updateVehicle',(req,res)=>vController.updateVehicle(req,res))
 vehicleRouter.get('/blockVehicle/:id',(req,res)=>vController.blockAndUnblock(req,res))
+vehicleRouter.post('/getBookingVehicles',(req,res)=>vController.checkAvailability(req,res))
 export default vehicleRouter 

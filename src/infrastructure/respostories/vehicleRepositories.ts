@@ -65,4 +65,12 @@ export class vehicleRepository implements IvehicleRepo{
             throw err
         }
     }
+    async updatebooking(id:any,booking:any):Promise<IvehicleRes | null>{
+        try{
+        return await vehicleSchema.findByIdAndUpdate(id,{$push:{bookings:booking}})
+        }catch(err){
+            throw err
+        }
+    }
+    
 }

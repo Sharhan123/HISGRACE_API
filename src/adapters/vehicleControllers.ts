@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { vehicleUseCase } from "../useCases/vehicleUseCase";
 import multer from "multer"
 import { uploadImageToCloudinary } from "../providers/cloudinart";
-import { Ivehicle, IvehicleAuth } from "../interfaces/schema/vehicleSchema";
+import { Ivehicle, IvehicleAuth, IvehicleRes } from "../interfaces/schema/vehicleSchema";
 import { STATUS_CODES } from "../constants/httpStatusCodes";
 
 const storage = multer.memoryStorage();
@@ -123,5 +123,46 @@ export class vehicleController {
             
         }
     }
+    async checkAvailability(req: Request, res: Response) {
+        try {
+            const { type, startingDate, endingDate } = req.body;
+            const allVehicles: IvehicleRes[] = await this.vehicleUseCase.getAllvehicles();
+
+            const dateRange = this.getDatesBetween(new Date(startingDate), new Date(endingDate));
+
+            const availableVehicles = allVehicles.filter(vehicle => {
+                if (vehicle.bookings && vehicle.bookings.length > 0) {
+                    const bookings = vehicle.bookings
+                    return !dateRange.some(date => bookings.includes(date));
+                } else {
+                    return true;
+                }
+            });
+
+            return res.status(200).json({ message: 'Success', data: availableVehicles });
+        } catch (error) {
+            console.error('Error checking availability:', error);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+
+    getDatesBetween(startDate: Date, endDate: Date): string[] {
+        const dates: string[] = [];
+        let currentDate = new Date(startDate);
+
+        while (currentDate <= new Date(endDate)) {
+            dates.push(currentDate.toISOString().split('T')[0]); // Store date in YYYY-MM-DD format
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        return dates;
+    }
+    
+    
+    
+    
+     
+
+
 } 
 

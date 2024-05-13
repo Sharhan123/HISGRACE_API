@@ -14,7 +14,7 @@ export interface Ilocation {
     postcode: string
     state: string
     state_code: string
-    place_id: string
+    place_id: string,
 }
 
 export interface Iperson {
@@ -48,7 +48,10 @@ export interface Ibooking {
     driver: Schema.Types.ObjectId,
     pickupDetails:Ipickup
     payment:boolean
-    status:String
+    status:String,
+    type:string,
+    returnDate:Date
+
 }
 
 export interface IbookingAuth{
@@ -63,5 +66,7 @@ export interface IbookingAuth{
     driver: Schema.Types.ObjectId,
     pickupDetails:Ipickup
     payment:boolean
+    type:string
+    returnDate:Date
 }
 

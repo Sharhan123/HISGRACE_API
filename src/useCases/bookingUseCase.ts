@@ -21,5 +21,8 @@ export class bookingusecase {
     async findAll(){
         return this.bookingRepository.findAll()
     }
+    async bookingStatus(id:string,status:string){
+        return this.bookingRepository.bookingStatus(id,status)
+    }
     
 }

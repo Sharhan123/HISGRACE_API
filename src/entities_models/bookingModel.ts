@@ -11,7 +11,7 @@ const bookingModel: Schema = new Schema<Ibooking & Document>({
     from: locationFrom,
     to: locationFrom,
     vehicle: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref:'vehicles',
         required: true,
     },
@@ -49,6 +49,9 @@ const bookingModel: Schema = new Schema<Ibooking & Document>({
             required:true
         }
     },
+    returnDate:{
+        type:Date
+    }, 
     person:{
         adult:{
             type:Number,
@@ -63,10 +66,13 @@ const bookingModel: Schema = new Schema<Ibooking & Document>({
         type:String,
         required:true,
         default:"Active"
+    },
+    type:{
+        type:String,
+        required:true,
     }
-
     
-})
+}) 
 
 const bookingSchema : Model<Ibooking & Document> = mongoose.model<Ibooking & Document>('bookings',bookingModel)
 

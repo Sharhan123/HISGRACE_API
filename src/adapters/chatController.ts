@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { STATUS_CODES } from "../constants/httpStatusCodes";
 import { chatUsecase } from "../useCases/chatUseCase";
 import jwt, { JwtPayload } from "jsonwebtoken"
+import { uploadAudioToCloudinary, uploadImageToCloudinary } from "../providers/cloudinart";
 export class chatController {
     constructor(
         private readonly chatUsecase: chatUsecase
@@ -16,6 +17,10 @@ export class chatController {
                 const content = req.body;
 
                 if(content){
+                    if(content.contentType === 'voice'){
+                        const link = await uploadImageToCloudinary(content.content)
+                        content.content = link
+                    }
                     const data = await this.chatUsecase.saveChats(content) 
                     return res.status(STATUS_CODES.OK).json({message:'success',data})
                 }else{

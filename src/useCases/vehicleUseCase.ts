@@ -28,4 +28,7 @@ export class vehicleUseCase {
     async blockAndUnblock(id:string):Promise<IvehicleRes | null>{
         return this.vehicleRepository.BlockByID(id)
     }
+    async updateBooking(id:any,booking:any):Promise<IvehicleRes | null>{
+        return await this.vehicleRepository.updatebooking(id,booking)
+    }
 }

@@ -13,7 +13,7 @@ export interface Ivehicle {
     desc:String
     images:String
     isBlocked:boolean
-    
+    bookings?:string[]
 }
 
 export interface IvehicleAuth{

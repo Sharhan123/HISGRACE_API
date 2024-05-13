@@ -41,6 +41,9 @@ const vehicleModel: Schema = new Schema<Ivehicle & Document>({
         type:String,
         required:true
         
+    },
+    bookings:{
+        type:Array<String>
     }
     
 })
