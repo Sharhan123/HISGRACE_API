@@ -5,12 +5,15 @@ export interface Idriver{
     driverName:String
     vehicles:Array<String>
     age:String,
+    email:String
     gender:String,
     exp:Number,
     mobile:String,
     isAvailble:boolean,
     image:String,
+    password:String
     driverBata:Number
+    status:String | Number
 }
 
 export interface IdriverAuth{
@@ -21,5 +24,8 @@ export interface IdriverAuth{
     exp:Number
     mobile:String
     image:String
+    password:String
     driverBata:Number
+    email:String
+    status:String|Number
 }

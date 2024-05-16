@@ -10,14 +10,18 @@ const driverModel: Schema = new Schema<Idriver & Document>({
         type: [''],
         required: true,
     },
+    email:{
+        type:String,
+        required:true
+    },
     age: {
         type: String,
         required: true,
     }, 
     gender: {
         type: String,
-        required:true
-        
+        // required:true,
+        default:'MALE'
     },
     exp: {
         type: Number,
@@ -39,6 +43,14 @@ const driverModel: Schema = new Schema<Idriver & Document>({
         type:String,
         required:true
         
+    },
+    password:{
+        type:String,
+        required:true
+    },
+    status:{
+        type:String || Number,
+        required:true
     }
     
 })

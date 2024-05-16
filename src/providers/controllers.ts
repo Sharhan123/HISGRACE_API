@@ -46,7 +46,7 @@ const useruseCase = new userUseCase(userRepository,tempuserRepository,jwt,sendMa
 const vehicleuseCase = new vehicleUseCase(VehicleRepository)
 const adminuseCase = new adminUseCase(AdminRepository)
 const packageuseCase = new packageUseCase(PackageRepository)
-const driverusecase = new driverUseCase(DriverRepository)
+const driverusecase = new driverUseCase(DriverRepository,sendMail)
 const bookingUsecase = new bookingusecase(BookingRepository)
 const chatusecase = new chatUsecase(ChatRepository)
 // controller ****
@@ -54,6 +54,6 @@ export const uController = new userController(useruseCase,generateOTP,encrypt,bo
 export const vController = new vehicleController(vehicleuseCase)
 export const aConntroller = new adminController(adminuseCase,jwt)
 export const pController = new packageController(packageuseCase)
-export const dController = new driverController(driverusecase)
+export const dController = new driverController(driverusecase,jwt)
 export const bController = new bookingController(bookingUsecase,vehicleuseCase)
 export const cController = new chatController(chatusecase)

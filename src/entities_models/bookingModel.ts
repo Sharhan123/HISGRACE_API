@@ -12,7 +12,7 @@ const bookingModel: Schema = new Schema<Ibooking & Document>({
     to: locationFrom,
     vehicle: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:'vehicles',
+        ref:'vehicles', 
         required: true,
     },
     distance: {

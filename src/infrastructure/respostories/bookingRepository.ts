@@ -38,11 +38,11 @@ export class bookingRepository implements IbookingRepo{
     }
     async findByUserId(id: String): Promise<Ibooking[] | null> {
         try{
-            let data = await bookingSchema.find({userId:id})
             await bookingSchema.updateMany({type: 'one-way','period.date': { $lt: new Date() }},{ $set: { status: 'Completed' } } )            
             await bookingSchema.updateMany({type: 'round-way','returnDate': { $lt: new Date() }},{ $set: { status: 'Completed' } } ) 
             
-            return data
+            return await bookingSchema.find({userId:id}).populate('vehicle')
+             
         }catch(err){
             throw err
         }

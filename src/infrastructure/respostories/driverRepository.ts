@@ -16,11 +16,11 @@ export class driverRepository implements IdriversRepo{
             return await new driverSchema(user).save()
         }catch(err){
             throw err
-        }
+        } 
     }
-    async  findByMobile(mobile: String): Promise<Idriver | null> {
+    async  findByEmail(email: String): Promise<Idriver | null> {
         try{
-            return await driverSchema.findOne({mobile:mobile})
+            return await driverSchema.findOne({email:email})
         }catch(err){
             throw err
         }
@@ -28,6 +28,21 @@ export class driverRepository implements IdriversRepo{
     async findAllDriver():Promise<Idriver[]>{
         try{
             return await driverSchema.find({})
+        }catch(err){
+            throw err
+        }
+    }
+    async updateStatus(email:string):Promise<Idriver | null>{
+        try{
+            return await driverSchema.findOneAndUpdate({email:email},{status:'verified'})
+        }catch(err){
+            throw err
+        }
+    }
+
+    async unSetOtp(email:any):Promise<Idriver | null>{
+        try{
+            return await driverSchema.findOneAndUpdate({email:email},{status:'pending'})
         }catch(err){
             throw err
         }
@@ -53,6 +68,20 @@ export class driverRepository implements IdriversRepo{
         try{
             const driver = await driverSchema.findById(id)
             return driverSchema.findByIdAndUpdate(id,{isAvailble:!driver?.isAvailble})
+        }catch(err){
+            throw err
+        }
+    }
+    async updateRequest(id:any,status:string):Promise<Idriver | null>{
+        try{
+            return await driverSchema.findByIdAndUpdate(id,{status:status})
+        }catch(err){
+            throw err
+        }
+    }
+    async removeById(id:any):Promise<Idriver | null>{
+        try{
+            return await driverSchema.findByIdAndDelete(id)
         }catch(err){
             throw err
         }
