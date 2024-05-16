@@ -218,7 +218,7 @@ export class driverController {
             }
             return res.status(STATUS_CODES.FORBIDDEN).json({message:"User on this email address not exist "})
         }catch(err){
-            console.log(err);
+            console.log(err,'hiii');
             
         }
     }
