@@ -24,7 +24,7 @@ export class packageRepository implements IpackageRepo{
     }
 async findById(id:string):Promise<Ipackage | null>{
     try{
-        return await packageSchema.findById(id)
+        return await packageSchema.findById(id).populate('vehicle')
     }catch(err){
         throw err
     }

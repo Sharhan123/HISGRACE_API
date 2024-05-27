@@ -8,5 +8,5 @@ packageRouter.get('/getPackages',(req,res)=>pController.getPackages(req,res))
 packageRouter.post('/editPackage',(req,res)=>pController.editPackage(req,res))
 packageRouter.delete('/deletePackage/:id',(req,res)=>pController.deletePackage(req,res))
 packageRouter.get('/blockPackage/:id',(req,res)=>pController.blockAndUnblock(req,res))
-
+packageRouter.get('/findById/:id',(req,res)=>pController.findPackage(req,res))
 export default packageRouter 

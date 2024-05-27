@@ -61,7 +61,7 @@ export class mailSender implements sendMail{
         const details = {
             from: 'subac172@gmail.com',
             to: email,
-            subject: "Hisgrace Driver Registration Rejected",
+            subject: "Hisgrace Driver Registration Approved",
             html: template
         };
 

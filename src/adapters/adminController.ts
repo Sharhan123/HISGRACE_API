@@ -23,14 +23,13 @@ export class adminController {
                     const token =  this.jwtToken.generateAdminToken(admin.email,ROLES.ADMIN)
                     return res.status(STATUS_CODES.OK).json({message:"success",token})
                 }
-                return res.status(STATUS_CODES.FORBIDDEN).json({message:"Entered password is incorrect"})
+                return res.status(STATUS_CODES.FORBIDDEN).json({password:"Entered password is incorrect"})
             }
-            return res.status(STATUS_CODES.FORBIDDEN).json({message:"Entered email is not valid "})
+            return res.status(STATUS_CODES.FORBIDDEN).json({email:"Entered email address is incorrect"})
 
         }catch(err){
             console.log(err);
-            res.status(STATUS_CODES.FORBIDDEN).json({message:err})
-            
+            res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({message:"sorry unfortunately our server is down please try again later"})  
         }
     }
     async getAllUsers(req:Request,res:Response){
@@ -41,7 +40,8 @@ export class adminController {
             return res.status(STATUS_CODES.OK).json({users,success:true})
         }catch(err){
            console.log(err);
-           
+           res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({message:"sorry unfortunately our server is down please try again later"})  
+
         }
     }
     async blockUser(req:Request,res:Response){
@@ -56,7 +56,8 @@ export class adminController {
 
         }catch(err){
             console.log(err);
-            
+            res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({message:"sorry unfortunately our server is down please try again later"})  
+
         }
     }  
 }

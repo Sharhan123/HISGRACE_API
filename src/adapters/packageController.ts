@@ -108,5 +108,16 @@ export class packageController {
             
         }
     }
+    async findPackage(req:Request,res:Response){
+        try{
+            const id =  req.params.id
+            const data = await this.packageUseCase.packageExist(id)
+            return res.status(STATUS_CODES.OK).json({message:'success',data})
+        }catch(err){
+            console.log(err);
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({message:"Sorry we are temporarily unavailable we will be back soon."})
+            
+        }
+    }
 
 } 
