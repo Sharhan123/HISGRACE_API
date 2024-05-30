@@ -28,7 +28,7 @@ export class packageController {
             return res.status(STATUS_CODES.OK).json({ message: 'success', saved })
         } catch (err) {
             console.log(err)
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: err })
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
         }
     }
 
@@ -39,7 +39,7 @@ export class packageController {
 
         } catch (err) {
             console.log(err);
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: err })
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
 
         }
     }
@@ -71,7 +71,7 @@ export class packageController {
 
         } catch (err) {
             console.log(err);
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: err })
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
 
         }
     }
@@ -87,7 +87,7 @@ export class packageController {
             return res.status(STATUS_CODES.UNAUTHORIZED).json({message:'Package id not found as params'})
         } catch (err) {
             console.log(err);
-            return res.status(STATUS_CODES.FORBIDDEN).json({ message: err })
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
 
         }
     } 
@@ -104,7 +104,7 @@ export class packageController {
             return res.status(STATUS_CODES.FORBIDDEN).json({message:'The package you trying to block is not exist'})
         }catch(err){
             console.log(err);
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({message:err})
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
             
         }
     }
@@ -115,7 +115,7 @@ export class packageController {
             return res.status(STATUS_CODES.OK).json({message:'success',data})
         }catch(err){
             console.log(err);
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({message:"Sorry we are temporarily unavailable we will be back soon."})
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
             
         }
     }

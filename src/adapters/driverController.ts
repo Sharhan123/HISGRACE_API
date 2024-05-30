@@ -180,7 +180,8 @@ export class driverController {
             return res.status(STATUS_CODES.UNAUTHORIZED).json({message:'driver does not found'})
         }catch(err){
             console.log(err);
-            
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
+   
         }
     }
     async removeDriver(req:Request,res:Response){
@@ -190,6 +191,8 @@ export class driverController {
             return res.status(STATUS_CODES.OK).json({message:'success',data})
         }catch(err){
             console.log(err);
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
+
             
         }
     }
@@ -201,7 +204,9 @@ export class driverController {
             this.driverusecase.sendTimeoutOTP(email,OTP,'Driver Hisgrace')
             return res.status(STATUS_CODES.OK).json({message:'success'})
         }catch(err){
-            console.log(err);   
+            console.log(err);
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
+   
         }
     }
     async driverLogin(req:Request,res:Response){
@@ -219,7 +224,8 @@ export class driverController {
             return res.status(STATUS_CODES.FORBIDDEN).json({message:"User on this email address not exist "})
         }catch(err){
             console.log(err,'hiii');
-            
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
+
         }
     }
 } 

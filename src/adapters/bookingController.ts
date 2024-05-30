@@ -36,8 +36,8 @@ export class bookingController {
                             product_data: {
                                 name: `Taxi booking charge of trip ${data.from.name || data.from.city} TO ${data.to.name || data.to.city}`,
                             },
-                            unit_amount: Math.round(Math.max(500, 0.3 * data.totalPrice) * 100),
-                        },
+                            unit_amount: Math.round(Math.round(Math.max(500, 0.3 * data.totalPrice) * 100)),
+                        }, 
                         quantity: 1,
 
                     },
@@ -122,7 +122,8 @@ export class bookingController {
             const data = await this.bookingusecase.findAll()
             return res.status(STATUS_CODES.OK).json({ message: "success", data })
         } catch (err) {
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'soryy' })
+            console.log(err);
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
         }
     }
     async getBookingByUser(req: Request, res: Response) {
@@ -136,8 +137,8 @@ export class bookingController {
             }
             return res.status(STATUS_CODES.UNAUTHORIZED).json({message:'Please try login again and try again '})
         } catch (err) {
+            console.log(err);
             return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'sorry we are facing some issues with our server' })
-
         }
     }
     async bookingStatus(req:Request,res:Response){
@@ -147,6 +148,7 @@ export class bookingController {
             const data = await this.bookingusecase.bookingStatus(id,status)
             return res.status(STATUS_CODES.OK).json({message:"success",data})
         }catch(err){
+            console.log(err);
             return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'sorry we are facing some issues with our server' })
         }
     }

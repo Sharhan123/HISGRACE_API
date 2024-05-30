@@ -38,7 +38,7 @@ export class vehicleController {
 
         }catch(err){
             console.log(err);
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({message:err}) 
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
             
         }
     }
@@ -53,7 +53,7 @@ export class vehicleController {
             return res.status(STATUS_CODES.OK).json({data:data,vehicles})
 
         }catch(err){
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({message:err})
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
         }
     }
     async deleteVehicle(req:Request,res:Response){
@@ -68,7 +68,7 @@ export class vehicleController {
             }
         }catch(err){
             console.log(err);
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({message:'Internal server error'})
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
             
         }
     }
@@ -99,7 +99,7 @@ export class vehicleController {
             console.log(err);
            
 
-                return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({message:err})
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
             
             
         }
@@ -119,7 +119,7 @@ export class vehicleController {
 
         }catch(err){
             console.log(err);
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({message:err})
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
             
         }
     }
@@ -142,7 +142,7 @@ export class vehicleController {
             return res.status(200).json({ message: 'Success', data: availableVehicles });
         } catch (error) {
             console.error('Error checking availability:', error);
-            return res.status(500).json({ message: 'Internal server error' });
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
         }
     }
 

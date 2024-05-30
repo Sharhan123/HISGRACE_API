@@ -29,13 +29,13 @@ const bookingModel: Schema = new Schema<Ibooking & Document>({
         required: true
     },
     driver:{
-        type:Schema.Types.ObjectId,
-        ref:'driver',
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'drivers',
         required:true
     },
     payment: {
         type: Boolean,
-        default:false,
+        default:false, 
         required: true
     },
     pickupDetails:pickupDetails,

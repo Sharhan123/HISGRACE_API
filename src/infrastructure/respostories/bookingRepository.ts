@@ -19,8 +19,8 @@ export class bookingRepository implements IbookingRepo{
         try{
 
             let data =  await bookingSchema.findById(id)
-            await bookingSchema.updateMany({type: 'one-way','period.date': { $lt: new Date() }},{ $set: { status: 'Completed' } } )            
-            await bookingSchema.updateMany({type: 'round-way','returnDate': { $lt: new Date() }},{ $set: { status: 'Completed' } } ) 
+            // await bookingSchema.updateMany({type: 'one-way','period.date': { $lt: new Date() }},{ $set: { status: 'Completed' } } )            
+            // await bookingSchema.updateMany({type: 'round-way','returnDate': { $lt: new Date() }},{ $set: { status: 'Completed' } } ) 
             return data
         }catch(err){
             throw err
@@ -29,19 +29,20 @@ export class bookingRepository implements IbookingRepo{
     async findAll():Promise<Ibooking [] | null>{ 
         try{
             await bookingSchema.deleteMany({payment:false})
-            await bookingSchema.updateMany({type: 'one-way','period.date': { $lt: new Date() }},{ $set: { status: 'Completed' } } )            
-            await bookingSchema.updateMany({type: 'round-way','returnDate': { $lt: new Date() }},{ $set: { status: 'Completed' } } )            
-        return await bookingSchema.find({payment:true}).populate('vehicle')
+            // await bookingSchema.updateMany({type: 'one-way','period.date': { $lt: new Date() }},{ $set: { status: 'Completed' } } )            
+            // await bookingSchema.updateMany({type: 'round-way','returnDate': { $lt: new Date() }},{ $set: { status: 'Completed' } } )            
+        return await bookingSchema.find({payment:true}).populate('vehicle').populate('driver')
         }catch(err){
             throw err
         }
     }
     async findByUserId(id: String): Promise<Ibooking[] | null> {
         try{
-            await bookingSchema.updateMany({type: 'one-way','period.date': { $lt: new Date() }},{ $set: { status: 'Completed' } } )            
-            await bookingSchema.updateMany({type: 'round-way','returnDate': { $lt: new Date() }},{ $set: { status: 'Completed' } } ) 
+            await bookingSchema.deleteMany({payment:false})
+            // await bookingSchema.updateMany({type: 'one-way','period.date': { $lt: new Date() }},{ $set: { status: 'Completed' } } )            
+            // await bookingSchema.updateMany({type: 'round-way','returnDate': { $lt: new Date() }},{ $set: { status: 'Completed' } } ) 
             
-            return await bookingSchema.find({userId:id}).populate('vehicle')
+            return await bookingSchema.find({userId:id}).populate('vehicle').populate('driver')
              
         }catch(err){
             throw err

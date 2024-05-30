@@ -52,7 +52,7 @@ export class userController {
 
         } catch (err) {
             console.log(err);
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: err })
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
         }
     }
 
@@ -97,6 +97,7 @@ export class userController {
 
         } catch (err) {
             console.log(err + 'from here');
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
 
         }
     }
@@ -123,7 +124,7 @@ export class userController {
             }
         } catch (err) {
             console.log(err);
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: err })
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
 
         }
     }
@@ -136,6 +137,7 @@ export class userController {
 
         } catch (err) {
             console.log(err);
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
 
         }
     }
@@ -155,6 +157,7 @@ export class userController {
 
         } catch (err) {
             console.log(err);
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
 
         }
     }
@@ -173,7 +176,7 @@ export class userController {
             }
         } catch (err) {
             console.log(err);
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: err })
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
 
         }
     }
@@ -194,7 +197,7 @@ export class userController {
             }
         } catch (err) {
             console.log(err);
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: err })
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
 
         }
     }
@@ -220,7 +223,7 @@ export class userController {
 
         } catch (err) {
             console.log(err);
-            return res.status(STATUS_CODES.OK).json({ message: err })
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
 
         }
     }
@@ -239,7 +242,7 @@ export class userController {
             }
             return res.status(STATUS_CODES.UNAUTHORIZED).json({ message: "User verification not found" })
         } catch (err) {
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: err })
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
         }
     }
     async updateImage(req: Request, res: Response) {
@@ -259,7 +262,7 @@ export class userController {
             return res.status(STATUS_CODES.BAD_REQUEST).json({ message: 'User does not exist' })
         } catch (err) {
             console.log(err);
-            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: err })
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
         }
     }
     async updateUser(req: Request, res: Response) {
@@ -326,7 +329,8 @@ export class userController {
         }catch(err)
         {
             console.log(err);
-            
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
+
         }
     }
     async updateUnRead(req:Request,res:Response){
@@ -339,7 +343,8 @@ export class userController {
         }catch(err)
         {
             console.log(err);
-            
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
+
         }
     }
     async updateNewMessage(req:Request,res:Response){
@@ -349,7 +354,8 @@ export class userController {
             return res.status(STATUS_CODES.OK).json({message:'success',data})
         }catch(err){
             console.log(err);
-            
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
+
         }
     }
 
