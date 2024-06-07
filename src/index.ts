@@ -3,7 +3,7 @@ import { mongoConnect } from './infrastructure/config/db';
 import {Server, Socket, Server as socketIo} from "socket.io"
 // import http from 'http'
 import server from './providers/socketIo';
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 4000
 const app = createServer()
 mongoConnect().then(()=>{
     if(server){ 
