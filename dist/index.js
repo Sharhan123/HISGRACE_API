@@ -7,7 +7,7 @@ const app_1 = require("./infrastructure/config/app");
 const db_1 = require("./infrastructure/config/db");
 // import http from 'http'
 const socketIo_1 = __importDefault(require("./providers/socketIo"));
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const app = (0, app_1.createServer)();
 (0, db_1.mongoConnect)().then(() => {
     if (socketIo_1.default) {

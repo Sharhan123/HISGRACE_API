@@ -23,9 +23,24 @@ const createServer = () => {
         app.use(express_1.default.json({ limit: '50mb' }));
         app.use(express_1.default.urlencoded({ limit: '50mb', extended: true }));
         app.use('/images', express_1.default.static(path_1.default.join(__dirname, '../../../images')));
+        // const corsOptions = {
+        //     origin: '*', 
+        //     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+        //     allowedHeaders: ['Content-Type', 'Authorization'], 
+        //     preflightContinue: true,
+        //     optionsSuccessStatus: 204
+        //   };
+        //   app.use(cors(corsOptions));
+        //   app.options('*', cors(corsOptions));
+        // const allowedOrigins = ['https://dns-manager-ui.vercel.app/'];
         app.use((0, cors_1.default)({
-            origin: '*'
+            origin: function (origin, callback) {
+                callback(null, true);
+            }
         }));
+        app.use('/', (req, res) => {
+            res.json({ message: 'ok' });
+        });
         app.use('/api/user', userRoutes_1.default);
         app.use('/api/vehicle', vehicleRoutes_1.default);
         app.use('/api/admin', adminRoutes_1.default);
