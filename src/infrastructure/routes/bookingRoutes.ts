@@ -1,7 +1,6 @@
 import  express from 'express'
 import { aConntroller, bController } from '../../providers/controllers'
 import { authMiddleware } from '../../middlewares/authMiddleware'
-import { adminRole } from '../../middlewares/adminMiddleWares/adminRole'
 const bookingRouter = express.Router()
 bookingRouter.post('/getBookingSession',(req,res)=>bController.bookingSession(req,res))
 bookingRouter.post('/webhook',(req,res)=>bController.webhookRouter(req,res))

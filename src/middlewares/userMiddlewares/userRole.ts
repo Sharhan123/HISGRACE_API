@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { JwtPayload } from "jsonwebtoken";
 
 export const adminRole = (req:any, res:Response, next:NextFunction) => {
     const user = req.user 

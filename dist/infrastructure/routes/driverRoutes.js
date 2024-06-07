@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const controllers_1 = require("../../providers/controllers");
+const driverRouter = express_1.default.Router();
+driverRouter.post('/addDriver', (req, res) => controllers_1.dController.addDriver(req, res));
+driverRouter.get('/getAllDrivers', (req, res) => controllers_1.dController.getDrivers(req, res));
+driverRouter.delete('/deleteDriver/:id', (req, res) => controllers_1.dController.deleteDriver(req, res));
+driverRouter.post('/updateDriver', (req, res) => controllers_1.dController.updateDriver(req, res));
+driverRouter.get('/blockDriver/:id', (req, res) => controllers_1.dController.blockDriver(req, res));
+driverRouter.post('/verifyOtp', (req, res) => controllers_1.dController.verifyOtp(req, res));
+driverRouter.get('/findDriver/:id', (req, res) => controllers_1.dController.findDriver(req, res));
+driverRouter.post('/updateRequest', (req, res) => controllers_1.dController.updateRequest(req, res));
+driverRouter.get('/removeDriver/:id', (req, res) => controllers_1.dController.removeDriver(req, res));
+driverRouter.post('/resendOtp', (req, res) => controllers_1.dController.resendOtp(req, res));
+driverRouter.post('/driverLogin', (req, res) => controllers_1.dController.driverLogin(req, res));
+exports.default = driverRouter;

@@ -1,0 +1,23 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const controllers_1 = require("../../providers/controllers");
+const userRouter = express_1.default.Router();
+userRouter.post('/register', (req, res) => controllers_1.uController.userRegister(req, res));
+userRouter.post('/verifyOtp', (req, res) => controllers_1.uController.verifyOtp(req, res));
+userRouter.get('/resendOtp', (req, res) => controllers_1.uController.resendOtp(req, res));
+userRouter.post('/verifylogin', (req, res) => controllers_1.uController.userSignin(req, res));
+userRouter.get('/verifyBlocked/:id', (req, res) => { controllers_1.uController.checkUserBlocked(req, res); });
+userRouter.post('/forgetPassword', (req, res) => { controllers_1.uController.forgetPassword(req, res); });
+userRouter.post('/forgetVerify', (req, res) => controllers_1.uController.verifyForgetOtp(req, res));
+userRouter.post('/resetPassword', (req, res) => controllers_1.uController.resetPassword(req, res));
+userRouter.post('/updateImage', (req, res) => controllers_1.uController.updateImage(req, res));
+userRouter.get('/getUser', (req, res) => controllers_1.uController.getUserData(req, res));
+userRouter.post('/updateProfile', (req, res) => controllers_1.uController.updateUser(req, res));
+userRouter.post('/updateAddress', (req, res) => controllers_1.uController.updateAddress(req, res));
+userRouter.post('/updateUnRead', (req, res) => controllers_1.uController.updateUnRead(req, res));
+userRouter.post('/updateNewMessage', (req, res) => controllers_1.uController.updateNewMessage(req, res));
+exports.default = userRouter;
