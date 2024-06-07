@@ -72,5 +72,12 @@ export class vehicleRepository implements IvehicleRepo{
             throw err
         }
     }
+    async setReview(id:any,data:{user:any,review:number}):Promise<IvehicleRes | null>{
+        try{
+            return await vehicleSchema.findByIdAndUpdate(id,{$push:{reviews:data}})
+        }catch(err){
+            throw err
+        }
+    }
     
 }

@@ -14,7 +14,10 @@ export interface Ivehicle {
     images:String
     isBlocked:boolean
     bookings?:string[]
+    reviews:{user:any,review:Number}[]
 }
+
+
 
 export interface IvehicleAuth{
     id:number

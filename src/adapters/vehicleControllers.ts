@@ -158,7 +158,18 @@ export class vehicleController {
         return dates;
     }
     
-    
+    async setReview(req:Request,res:Response){
+        try{
+            const {user,vehicle,review} = req.body
+            const reviewData = {user:user,review:review}
+
+            const data = await this.vehicleUseCase.setReview(vehicle,reviewData)
+            return res.status(STATUS_CODES.OK).json({message:"success",data})
+        }catch(err){
+            console.error('Error checking availability:', err);
+            return res.status(STATUS_CODES.INTERNAL_SERVER_ERROR).json({ message: 'Sorry, the server is facing an issue will be fixed soon.' })
+        }
+    }
     
     
      

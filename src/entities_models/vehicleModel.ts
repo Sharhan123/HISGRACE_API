@@ -44,7 +44,16 @@ const vehicleModel: Schema = new Schema<Ivehicle & Document>({
     },
     bookings:{
         type:Array<String>
-    }
+    },
+    reviews: [{
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Users', 
+        },
+        review: {
+            type: Number,
+        }
+    }]
     
 })
 

@@ -9,6 +9,7 @@ import packageRouter from "../routes/packageRoutes";
 import driverRouter from "../routes/driverRoutes";
 import bookingRouter from "../routes/bookingRoutes";
 import chatRouter from "../routes/chatRoutes";
+import packageBookingRouter from "../routes/packageBookingRoutes";
 dotenv.config()
 
 
@@ -33,7 +34,7 @@ export const createServer = () => {
         app.use('/api/driver',driverRouter)
         app.use('/api/bookings',bookingRouter)
         app.use('/api/chat',chatRouter)
-
+        app.use('/api/packageBooking',packageBookingRouter)
         return app
 
     } catch (err) {

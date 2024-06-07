@@ -25,6 +25,9 @@ import { bookingController } from "../adapters/bookingController";
 import { chatRepository } from "../infrastructure/respostories/chatRepository";
 import { chatUsecase } from "../useCases/chatUseCase";
 import { chatController } from "../adapters/chatController";
+import { PackageBookingRepository } from "../infrastructure/respostories/packageBookingRepository";
+import { packageBookingUsecase } from "../useCases/packageBooking";
+import { packageBookingController } from "../adapters/packageBookingController";
 
 
 // Providers used ****
@@ -41,6 +44,7 @@ const PackageRepository = new packageRepository()
 const DriverRepository = new driverRepository()
 const BookingRepository = new bookingRepository()
 const ChatRepository  = new chatRepository()
+const packageBookingRepository = new PackageBookingRepository()
 // usecases ****
 const useruseCase = new userUseCase(userRepository,tempuserRepository,jwt,sendMail,encrypt)
 const vehicleuseCase = new vehicleUseCase(VehicleRepository)
@@ -49,6 +53,7 @@ const packageuseCase = new packageUseCase(PackageRepository)
 const driverusecase = new driverUseCase(DriverRepository,sendMail)
 const bookingUsecase = new bookingusecase(BookingRepository)
 const chatusecase = new chatUsecase(ChatRepository)
+const packageBookingusecase = new packageBookingUsecase(packageBookingRepository)
 // controller ****
 export const uController = new userController(useruseCase,generateOTP,encrypt,bookingUsecase)
 export const vController = new vehicleController(vehicleuseCase)
@@ -57,3 +62,4 @@ export const pController = new packageController(packageuseCase)
 export const dController = new driverController(driverusecase,jwt)
 export const bController = new bookingController(bookingUsecase,vehicleuseCase)
 export const cController = new chatController(chatusecase)
+export const pbController = new packageBookingController(packageBookingusecase)

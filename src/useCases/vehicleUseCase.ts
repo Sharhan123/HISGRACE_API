@@ -31,4 +31,7 @@ export class vehicleUseCase {
     async updateBooking(id:any,booking:any):Promise<IvehicleRes | null>{
         return await this.vehicleRepository.updatebooking(id,booking)
     }
+    async setReview(id:any,data:{user:any,review:number}):Promise<IvehicleRes | null>{
+        return await this.vehicleRepository.setReview(id,data)
+    }
 }
