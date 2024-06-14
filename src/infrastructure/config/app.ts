@@ -10,6 +10,7 @@ import driverRouter from "../routes/driverRoutes";
 import bookingRouter from "../routes/bookingRoutes";
 import chatRouter from "../routes/chatRoutes";
 import packageBookingRouter from "../routes/packageBookingRoutes";
+import reviewRouter from "../routes/reviewRoutes";
 dotenv.config()
 
 
@@ -23,26 +24,16 @@ export const createServer = () => {
         app.use(express.json({ limit: '50mb' }))
         app.use(express.urlencoded({ limit: '50mb', extended: true }))
         app.use('/images', express.static(path.join(__dirname, '../../../images')))
-        // const corsOptions = {
-        //     origin: '*', 
-        //     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
-        //     allowedHeaders: ['Content-Type', 'Authorization'], 
-        //     preflightContinue: true,
-        //     optionsSuccessStatus: 204
-        //   };
-
-        //   app.use(cors(corsOptions));
-
-        //   app.options('*', cors(corsOptions));
-
-        // const allowedOrigins = ['https://dns-manager-ui.vercel.app/'];
-
-        app.use(cors({
-            origin: function (origin, callback) {
-                callback(null, true);
-            }
-        }));
-        app.use('/',(req,res)=>{
+        const corsOptions = {
+            origin:'https://hisgrace-ui.vercel.app/', 
+            methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+            allowedHeaders: ['Content-Type', 'Authorization'], 
+            credentials: true, 
+          };
+          
+          app.use(cors(corsOptions));
+          app.options('*', cors(corsOptions));
+        app.get('/',(req,res)=>{
             res.json({message:'ok'})
         })
         app.use('/api/user', userRouter)
@@ -53,6 +44,7 @@ export const createServer = () => {
         app.use('/api/bookings', bookingRouter)
         app.use('/api/chat', chatRouter)
         app.use('/api/packageBooking', packageBookingRouter)
+        app.use('/api/reviews',reviewRouter)
         return app
 
     } catch (err) {
