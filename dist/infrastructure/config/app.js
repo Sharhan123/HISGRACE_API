@@ -16,6 +16,7 @@ const driverRoutes_1 = __importDefault(require("../routes/driverRoutes"));
 const bookingRoutes_1 = __importDefault(require("../routes/bookingRoutes"));
 const chatRoutes_1 = __importDefault(require("../routes/chatRoutes"));
 const packageBookingRoutes_1 = __importDefault(require("../routes/packageBookingRoutes"));
+const reviewRoutes_1 = __importDefault(require("../routes/reviewRoutes"));
 dotenv_1.default.config();
 const createServer = () => {
     try {
@@ -23,22 +24,15 @@ const createServer = () => {
         app.use(express_1.default.json({ limit: '50mb' }));
         app.use(express_1.default.urlencoded({ limit: '50mb', extended: true }));
         app.use('/images', express_1.default.static(path_1.default.join(__dirname, '../../../images')));
-        // const corsOptions = {
-        //     origin: '*', 
-        //     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
-        //     allowedHeaders: ['Content-Type', 'Authorization'], 
-        //     preflightContinue: true,
-        //     optionsSuccessStatus: 204
-        //   };
-        //   app.use(cors(corsOptions));
-        //   app.options('*', cors(corsOptions));
-        // const allowedOrigins = ['https://dns-manager-ui.vercel.app/'];
-        app.use((0, cors_1.default)({
-            origin: function (origin, callback) {
-                callback(null, true);
-            }
-        }));
-        app.use('/', (req, res) => {
+        const corsOptions = {
+            origin: 'https://hisgrace-ui.vercel.app/',
+            methods: ['GET', 'POST', 'PUT', 'DELETE'],
+            allowedHeaders: ['Content-Type', 'Authorization'],
+            credentials: true,
+        };
+        app.use((0, cors_1.default)(corsOptions));
+        app.options('*', (0, cors_1.default)(corsOptions));
+        app.get('/', (req, res) => {
             res.json({ message: 'ok' });
         });
         app.use('/api/user', userRoutes_1.default);
@@ -49,6 +43,7 @@ const createServer = () => {
         app.use('/api/bookings', bookingRoutes_1.default);
         app.use('/api/chat', chatRoutes_1.default);
         app.use('/api/packageBooking', packageBookingRoutes_1.default);
+        app.use('/api/reviews', reviewRoutes_1.default);
         return app;
     }
     catch (err) {

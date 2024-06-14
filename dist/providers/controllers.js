@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pbController = exports.cController = exports.bController = exports.dController = exports.pController = exports.aConntroller = exports.vController = exports.uController = void 0;
+exports.rController = exports.pbController = exports.cController = exports.bController = exports.dController = exports.pController = exports.aConntroller = exports.vController = exports.uController = void 0;
 const userController_1 = require("../adapters/userController");
 const userRepository_1 = require("../infrastructure/respostories/userRepository");
 const tempUserRepository_1 = require("../infrastructure/respostories/tempUserRepository");
@@ -30,6 +30,9 @@ const chatController_1 = require("../adapters/chatController");
 const packageBookingRepository_1 = require("../infrastructure/respostories/packageBookingRepository");
 const packageBooking_1 = require("../useCases/packageBooking");
 const packageBookingController_1 = require("../adapters/packageBookingController");
+const reviewRespositories_1 = require("../infrastructure/respostories/reviewRespositories");
+const reviewUsecase_1 = require("../useCases/reviewUsecase");
+const reviewControllers_1 = require("../adapters/reviewControllers");
 // Providers used ****
 const encrypt = new encrypt_1.encrypting();
 const generateOTP = new generateOtp_1.GenerateOtp();
@@ -45,6 +48,7 @@ const DriverRepository = new driverRepository_1.driverRepository();
 const BookingRepository = new bookingRepository_1.bookingRepository();
 const ChatRepository = new chatRepository_1.chatRepository();
 const packageBookingRepository = new packageBookingRepository_1.PackageBookingRepository();
+const reviewRepository = new reviewRespositories_1.ReviewRepository();
 // usecases ****
 const useruseCase = new userUseCase_1.userUseCase(userRepository, tempuserRepository, jwt, sendMail, encrypt);
 const vehicleuseCase = new vehicleUseCase_1.vehicleUseCase(VehicleRepository);
@@ -54,6 +58,7 @@ const driverusecase = new driverUseCase_1.driverUseCase(DriverRepository, sendMa
 const bookingUsecase = new bookingUseCase_1.bookingusecase(BookingRepository);
 const chatusecase = new chatUseCase_1.chatUsecase(ChatRepository);
 const packageBookingusecase = new packageBooking_1.packageBookingUsecase(packageBookingRepository);
+const reviewUsecase = new reviewUsecase_1.ReviewUsecase(reviewRepository);
 // controller ****
 exports.uController = new userController_1.userController(useruseCase, generateOTP, encrypt, bookingUsecase);
 exports.vController = new vehicleControllers_1.vehicleController(vehicleuseCase);
@@ -63,3 +68,4 @@ exports.dController = new driverController_1.driverController(driverusecase, jwt
 exports.bController = new bookingController_1.bookingController(bookingUsecase, vehicleuseCase);
 exports.cController = new chatController_1.chatController(chatusecase);
 exports.pbController = new packageBookingController_1.packageBookingController(packageBookingusecase);
+exports.rController = new reviewControllers_1.reviewController(reviewUsecase);
